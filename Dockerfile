@@ -1,15 +1,19 @@
-# Этап сборки
 FROM node:22-alpine AS builder
 
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install
+RUN corepack enable
+
+COPY package.json pnpm-lock.yaml ./
+
+RUN pnpm install --frozen-lockfile
 
 COPY . .
-RUN npm run build
 
-# Этап nginx
+RUN pnpm build
+
 FROM nginx:alpine
 
 COPY --from=builder /app/out /usr/share/nginx/html
+
+EXPOSE 80
