@@ -11,7 +11,7 @@ export default function Team() {
   ];
 
   return (
-    <section id="team" className="py-16 md:py-24 bg-white">
+    <section id="team" className="py-16 md:py-24 bg-white scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4">
         <div className="mb-8 md:mb-16 text-center md:text-left">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Біздің команда</h2>
@@ -22,10 +22,11 @@ export default function Team() {
           {team.map((member, i) => (
             <div key={i} className="w-[65vw] max-w-[260px] md:max-w-none md:w-auto shrink-0 snap-center group">
               <div className="aspect-[3/4] rounded-[2rem] md:rounded-[2.5rem] overflow-hidden mb-4 md:mb-6 shadow-soft">
-                <img 
-                  src={member.img} 
-                  alt={member.name} 
-                  className="w-full h-full object-cover group-hover:scale-110 transition duration-700" 
+                <img
+                  src={member.img}
+                  alt={`${member.name} — ${member.role}, Abyroy Rehab Шымкент`}
+                  loading="lazy"
+                  className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
                 />
               </div>
               <h3 className="text-base md:text-lg font-bold text-rehab-dark text-center md:text-left">{member.name}</h3>

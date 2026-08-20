@@ -10,7 +10,7 @@ const steps = [
 
 export default function Roadmap() {
   return (
-    <section id="roadmap" className="py-24 bg-[#F5F5F7]">
+    <section id="roadmap" className="py-24 bg-[#F5F5F7] scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 text-center">
         <h2 className="text-4xl font-bold mb-16 text-rehab-dark">Сауығу жолы</h2>
         
