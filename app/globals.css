@@ -39,14 +39,32 @@ body {
   @apply bg-rehab-gold hover:bg-rehab-gold-dark text-white px-8 py-4 rounded-2xl font-bold transition-all shadow-lg shadow-rehab-gold/20 active:scale-95 text-center;
 }
 
-/* Единая золотая пульсация для всех конверсионных кнопок (звонок и WhatsApp
-   одинаковые — раньше пульс был разного цвета на разных кнопках и выглядел
-   несогласованно). */
+/* Правило пульсации: ореол всегда цвета своей кнопки, иначе получается
+   «у золотой кнопки зелёный пульс». Золотые кнопки — золотой пульс,
+   зелёные (WhatsApp) — зелёный. Белые кнопки и постоянно видимая нижняя
+   панель не пульсируют вовсе — им и так достаётся всё внимание. */
 @keyframes call-pulse {
-  0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.55); }
+  0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.5); }
   70% { box-shadow: 0 0 0 14px rgba(212, 175, 55, 0); }
   100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
 }
 .animate-call-pulse {
-  animation: call-pulse 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  animation: call-pulse 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes whatsapp-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+  70% { box-shadow: 0 0 0 14px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+.animate-whatsapp-pulse {
+  animation: whatsapp-pulse 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Уважаем системную настройку «меньше движения» */
+@media (prefers-reduced-motion: reduce) {
+  .animate-call-pulse,
+  .animate-whatsapp-pulse {
+    animation: none;
+  }
 }
