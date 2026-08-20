@@ -1,6 +1,7 @@
 import type { Lang } from "@/constants/dictionaries";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import TrustBar from "@/components/TrustBar";
 import Intro from "@/components/Intro";
 import Advantages from "@/components/Advantages";
 import Services from "@/components/Services";
@@ -16,6 +17,7 @@ export default function HomePage({ lang }: { lang: Lang }) {
     <main className="min-h-screen bg-white">
       <Header lang={lang} />
       <Hero lang={lang} />
+      <TrustBar lang={lang} />
       <Intro lang={lang} />
       <Services lang={lang} />
       <Advantages lang={lang} />
