@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { Phone, ShieldCheck, Clock } from "lucide-react";
+import { Phone } from "lucide-react";
 import { SITE_DATA } from "@/constants";
 import { getDictionary, type Lang } from "@/constants/dictionaries";
 
@@ -26,24 +26,12 @@ export default function Hero({ lang }: { lang: Lang }) {
             <span className="text-[#D4AF37]">{h.titleLine1}</span> <br/>
             {h.titleLine2}
           </h1>
-          <p className="text-sm sm:text-base md:text-lg text-gray-500 mb-4 md:mb-5 max-w-md mx-auto md:mx-0">
+          <p className="text-sm sm:text-base md:text-lg text-gray-500 mb-6 md:mb-8 max-w-md mx-auto md:mx-0">
             {h.subtitle}
           </p>
 
-          {/* УТП: анонимность + приём 24/7 — главные факторы принятия решения */}
-          <div className="flex flex-wrap justify-center md:justify-start gap-2 mb-6 md:mb-8">
-            <span className="inline-flex items-center gap-1.5 bg-white border border-gray-200 shadow-sm rounded-full px-3 py-1.5 text-xs md:text-sm font-bold text-[#333333]">
-              <ShieldCheck size={16} className="text-[#D4AF37]" />
-              {h.pillAnon}
-              <span className="hidden sm:inline text-gray-400 font-medium">· {h.pillAnonSub}</span>
-            </span>
-            <span className="inline-flex items-center gap-1.5 bg-white border border-gray-200 shadow-sm rounded-full px-3 py-1.5 text-xs md:text-sm font-bold text-[#333333]">
-              <Clock size={16} className="text-[#D4AF37]" />
-              {h.pill247}
-            </span>
-          </div>
-
-          {/* Статистика: фиксированные размеры для предсказуемости */}
+          {/* Статистика: фиксированные размеры для предсказуемости.
+              Анонимность и приём 24/7 — заявлены здесь же цифрой и подписью. */}
           <div className="grid grid-cols-3 gap-2 md:gap-8 max-w-lg mx-auto md:mx-0 mb-8 md:mb-10">
             <div className="flex flex-col">
               <span className="text-xl md:text-3xl font-bold text-[#333333]">{h.statYears.value}</span>
@@ -65,7 +53,7 @@ export default function Hero({ lang }: { lang: Lang }) {
               target="_blank"
               rel="noopener noreferrer"
               data-event="click_whatsapp"
-              className="animate-whatsapp-pulse inline-flex items-center gap-3 bg-[#D4AF37] text-white px-6 py-3 md:px-10 md:py-4 rounded-2xl font-bold hover:bg-[#b8962d] transition shadow-xl text-base md:text-lg"
+              className="animate-call-pulse inline-flex items-center gap-3 bg-[#D4AF37] text-white px-6 py-3 md:px-10 md:py-4 rounded-2xl font-bold hover:bg-[#b8962d] transition shadow-xl text-base md:text-lg"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M6.014 8.00613C6.12827 7.1024 7.30277 5.87414 8.23488 6.01043L8.23339 6.00894C9.14051 6.18132 9.85859 7.74261 10.2635 8.44465C10.5504 8.95402 10.3641 9.4701 10.0965 9.68787C9.7355 9.97883 9.17099 10.3803 9.28943 10.7834C9.5 11.5 12 14 13.2296 14.7107C13.695 14.9797 14.0325 14.2702 14.3207 13.9067C14.5301 13.6271 15.0466 13.46 15.5548 13.736C16.3138 14.178 17.0288 14.6917 17.69 15.27C18.0202 15.546 18.0977 15.9539 17.8689 16.385C17.4659 17.1443 16.3003 18.1456 15.4542 17.9421C13.9764 17.5868 8 15.27 6.08033 8.55801C5.97237 8.24048 5.99955 8.12044 6.014 8.00613Z"/>

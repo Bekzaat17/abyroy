@@ -6,7 +6,7 @@ import { getDictionary, type Lang } from "@/constants/dictionaries";
 
 export default function Footer({ lang }: { lang: Lang }) {
   const dict = getDictionary(lang);
-  const privacyHref = lang === "kk" ? "/kk/privacy/" : "/privacy/";
+  const privacyHref = lang === "ru" ? "/ru/privacy/" : "/privacy/";
 
   return (
     // pb-* на мобильных компенсирует высоту фиксированной MobileContactBar —

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "../../globals.css";
+import "../globals.css";
 import { montserrat } from "@/lib/fonts";
 import { buildMetadata, buildJsonLd } from "@/lib/seo";
 import { GTMHead, GTMBody } from "@/components/GTM";

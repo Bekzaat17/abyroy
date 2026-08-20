@@ -20,7 +20,7 @@ export default function Header({ lang }: { lang: Lang }) {
     { href: "#faq", label: dict.nav.faq },
   ];
 
-  const home = lang === "kk" ? "/kk/" : "/";
+  const home = lang === "ru" ? "/ru/" : "/";
 
   return (
     <header className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
