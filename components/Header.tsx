@@ -4,29 +4,34 @@ import Link from "next/link";
 import Image from "next/image";
 import { Phone, Menu, X } from "lucide-react";
 import { SITE_DATA } from "@/constants";
+import { getDictionary, type Lang } from "@/constants/dictionaries";
+import LangSwitch from "@/components/LangSwitch";
 
-const navLinks = [
-  { href: "#about", label: "Біз туралы" },
-  { href: "#services", label: "Қызметтер" },
-  { href: "#roadmap", label: "Бағдарлама" },
-  { href: "#team", label: "Команда" },
-  { href: "#reviews", label: "Пікірлер" },
-  { href: "#faq", label: "Сұрақтар" },
-];
-
-export default function Header() {
+export default function Header({ lang }: { lang: Lang }) {
   const [open, setOpen] = useState(false);
+  const dict = getDictionary(lang);
+
+  const navLinks = [
+    { href: "#about", label: dict.nav.about },
+    { href: "#services", label: dict.nav.services },
+    { href: "#roadmap", label: dict.nav.roadmap },
+    { href: "#team", label: dict.nav.team },
+    { href: "#reviews", label: dict.nav.reviews },
+    { href: "#faq", label: dict.nav.faq },
+  ];
+
+  const home = lang === "kk" ? "/kk/" : "/";
 
   return (
     <header className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
 
         {/* Логотип: w-auto позволяет сохранять пропорции при разной высоте */}
-        <Link href="/" className="flex items-center gap-2">
+        <Link href={home} className="flex items-center gap-2">
           <div className="relative h-8 md:h-10 w-[112px] md:w-[140px]">
             <Image
               src="/logo.png"
-              alt="Abyroy Rehab — реабилитационный центр в Шымкенте"
+              alt={dict.meta.ogAlt}
               fill
               priority
               className="object-contain"
@@ -44,10 +49,13 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-2 md:gap-3">
+          <LangSwitch lang={lang} className="hidden md:inline-flex" />
+
           {/* Кнопка звонка — всегда видна, в т.ч. на телефоне */}
           <a
             href={`tel:${SITE_DATA.phone.replace(/[^\d+]/g, "")}`}
-            className="animate-call-pulse rounded-full bg-rehab-gold text-white px-3 py-2 md:px-6 md:py-2.5 text-xs md:text-sm font-bold hover:bg-rehab-goldDark transition-all flex items-center gap-2 shadow-lg shadow-rehab-gold/20 whitespace-nowrap"
+            data-event="click_phone"
+            className="animate-call-pulse rounded-full bg-rehab-gold text-white px-3 py-2 md:px-6 md:py-2.5 text-xs md:text-sm font-bold hover:bg-rehab-gold-dark transition-all flex items-center gap-2 shadow-lg shadow-rehab-gold/20 whitespace-nowrap"
           >
             <Phone size={16} className="w-4 h-4 md:w-4 md:h-4" />
             <span className="hidden sm:inline">{SITE_DATA.phone}</span>
@@ -56,7 +64,7 @@ export default function Header() {
           {/* Бургер-меню (мобильді) */}
           <button
             type="button"
-            aria-label={open ? "Мәзірді жабу" : "Мәзірді ашу"}
+            aria-label={open ? dict.header.menuClose : dict.header.menuOpen}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
             className="md:hidden w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 text-rehab-dark"
@@ -82,8 +90,10 @@ export default function Header() {
             ))}
           </nav>
           <div className="flex flex-col gap-3 pt-4 border-t border-gray-100">
+            <LangSwitch lang={lang} className="self-start" />
             <a
               href={`tel:${SITE_DATA.phone.replace(/[^\d+]/g, "")}`}
+              data-event="click_phone"
               className="flex items-center gap-2 text-sm font-bold text-rehab-dark"
             >
               <Phone size={18} className="text-rehab-gold" />
@@ -93,6 +103,7 @@ export default function Header() {
               href={SITE_DATA.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
+              data-event="click_whatsapp"
               className="flex items-center gap-2 text-sm font-bold text-rehab-dark"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" className="text-rehab-gold">

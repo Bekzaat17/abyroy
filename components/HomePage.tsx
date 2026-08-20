@@ -1,3 +1,4 @@
+import type { Lang } from "@/constants/dictionaries";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Intro from "@/components/Intro";
@@ -10,21 +11,20 @@ import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 
-export default function Home() {
-    return (
+export default function HomePage({ lang }: { lang: Lang }) {
+  return (
     <main className="min-h-screen bg-white">
-      <Header />
-      <Hero />
-      <Intro />
-      <Services />
-      <Advantages />
-      <Roadmap />
-      <Team />
-      <Reviews />
-      <FAQ />
-      <CTA />
-      <Footer />
+      <Header lang={lang} />
+      <Hero lang={lang} />
+      <Intro lang={lang} />
+      <Services lang={lang} />
+      <Advantages lang={lang} />
+      <Roadmap lang={lang} />
+      <Team lang={lang} />
+      <Reviews lang={lang} />
+      <FAQ lang={lang} />
+      <CTA lang={lang} />
+      <Footer lang={lang} />
     </main>
   );
-
 }

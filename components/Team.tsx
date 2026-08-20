@@ -1,25 +1,18 @@
-export default function Team() {
-  const team = [
-    { name: "Жаңабай Бахтияр", role: "Амбулаториялық бағдарлама жетекшісі", img: "/bahtiyar.jpg" },
-    { name: "Андас Гүлназ", role: "Психолог, жақындармен жұмыс жасау бөлімі", img: "/gulnaz.jpg" },
-    { name: "Мансуров Қанат", role: "Психолог-аддиктолог", img: "/kanat.jpg" },
-    { name: "Аман", role: "Бағдарлама директоры", img: "/aman.jpg" },
-    { name: "Скеметр Мақсат", role: "Координатор", img: "/maksat_kordinator.jpg" },
-    { name: "Әліпбай Нұрислам", role: "Директор", img: "/nurislam.jpg" },
-    { name: "Журумбай Гаухар", role: "Психолог", img: "/gauhar.jpg" },
-    { name: "Сейдалиев Мақсат", role: "Үй жетекшісі", img: "/maksat.jpg" },
-  ];
+import { getDictionary, type Lang } from "@/constants/dictionaries";
+
+export default function Team({ lang }: { lang: Lang }) {
+  const dict = getDictionary(lang);
 
   return (
     <section id="team" className="py-16 md:py-24 bg-white scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4">
         <div className="mb-8 md:mb-16 text-center md:text-left">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Біздің команда</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">{dict.team.title}</h2>
         </div>
 
         {/* Мобильдіде карусель (кішкентай фотолармен), Десктопта баяғыдай 4 бағанды grid */}
         <div className="flex overflow-x-auto gap-4 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-8 snap-x snap-mandatory pb-4 md:pb-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
-          {team.map((member, i) => (
+          {dict.team.members.map((member, i) => (
             <div key={i} className="w-[65vw] max-w-[260px] md:max-w-none md:w-auto shrink-0 snap-center group">
               <div className="aspect-[3/4] rounded-[2rem] md:rounded-[2.5rem] overflow-hidden mb-4 md:mb-6 shadow-soft">
                 <img
