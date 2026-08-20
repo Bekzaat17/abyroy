@@ -33,7 +33,7 @@ export default function Hero({ lang }: { lang: Lang }) {
       {/* Фото в своём — более широком — контейнере, чтобы стоять правее и крупнее,
           при этом текст ниже остаётся на общей сетке сайта. */}
       <div className="pointer-events-none absolute inset-0 z-10 mx-auto hidden w-full max-w-[1700px] md:block">
-        <div className="absolute bottom-0 right-0 h-full w-[44%]">
+        <div className="absolute bottom-0 right-2 h-full w-[44%]">
           <Image
             src="/main_page.png"
             alt={dict.meta.ogAlt}
@@ -88,15 +88,16 @@ export default function Hero({ lang }: { lang: Lang }) {
           </div>
 
           {/* Блок доверия — прямо под кнопками, слева от фото. Каждый пункт
-              отдельной карточкой; w-fit — чтобы карточка обжимала свой текст,
-              а не тянулась на всю колонку с пустотой справа. */}
-          <ul className="mt-6 flex flex-col items-center gap-2 md:items-start">
+              отдельной карточкой. w-fit стоит на списке, а карточки внутри
+              тянутся на его ширину: список обжимается по самой длинной строке,
+              а все три карточки при этом одинаковой ширины и не «пляшут». */}
+          <ul className="mx-auto mt-6 flex w-fit max-w-full flex-col gap-2 md:mx-0">
             {h.trust.map((item, i) => {
               const Icon = trustIcons[i];
               return (
                 <li
                   key={item.title}
-                  className="flex w-fit max-w-full items-start gap-2.5 rounded-xl border border-gray-100 bg-white/80 px-3.5 py-2.5 text-left shadow-sm shadow-black/[0.03] backdrop-blur-sm"
+                  className="flex w-full items-start gap-2.5 rounded-xl border border-gray-100 bg-white/80 px-3.5 py-2.5 text-left shadow-sm shadow-black/[0.03] backdrop-blur-sm"
                 >
                   <Icon size={17} className="mt-0.5 shrink-0 text-rehab-gold" />
                   <p className="text-[13px] leading-snug text-gray-500">
