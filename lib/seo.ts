@@ -36,9 +36,9 @@ export function buildMetadata(lang: Lang): Metadata {
       },
     },
     icons: {
-      icon: "/favicon.png?v=2",
-      shortcut: "/favicon.png?v=2",
-      apple: "/favicon.png?v=2",
+      icon: "/favicon.png?v=3",
+      shortcut: "/favicon.png?v=3",
+      apple: "/favicon.png?v=3",
     },
     openGraph: {
       title: dict.meta.title,
@@ -50,8 +50,8 @@ export function buildMetadata(lang: Lang): Metadata {
       images: [
         {
           url: SEO_DATA.ogImage,
-          width: 1699,
-          height: 1424,
+          width: 1200,
+          height: 1006,
           alt: dict.meta.ogAlt,
         },
       ],

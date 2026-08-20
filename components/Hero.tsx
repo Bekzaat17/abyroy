@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Phone, ShieldCheck, Clock, HeartHandshake } from "lucide-react";
 import { SITE_DATA } from "@/constants";
 import { getDictionary, type Lang } from "@/constants/dictionaries";
@@ -34,14 +33,22 @@ export default function Hero({ lang }: { lang: Lang }) {
           при этом текст ниже остаётся на общей сетке сайта. */}
       <div className="pointer-events-none absolute inset-0 z-10 mx-auto hidden w-full max-w-[1700px] md:block">
         <div className="absolute bottom-0 right-2 h-full w-[44%]">
-          <Image
-            src="/main_page.png"
-            alt={dict.meta.ogAlt}
-            fill
-            priority
-            sizes="(min-width: 768px) 50vw, 0px"
-            className="object-contain object-bottom"
-          />
+          {/* Обычный <picture> вместо next/image: при статическом экспорте
+              (images.unoptimized) next/image всё равно отдаёт голый <img>, но
+              вдобавок ставит preload — и телефон качал фото, которого не видит
+              (блок скрыт до md). Здесь реальный файл подключён только через
+              media-условие, а на мобильном подставляется пиксель из data-URI,
+              то есть запроса в сеть нет вообще. */}
+          <picture>
+            <source media="(min-width: 768px)" srcSet="/main_page.webp" type="image/webp" />
+            <img
+              src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+              alt={dict.meta.ogAlt}
+              fetchPriority="high"
+              decoding="async"
+              className="absolute inset-0 h-full w-full object-contain object-bottom"
+            />
+          </picture>
         </div>
       </div>
 

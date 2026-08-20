@@ -43,7 +43,7 @@ export default function PrivacyPage({ lang }: { lang: Lang }) {
         <div className="grow overflow-y-auto px-5 md:px-8 py-6 md:py-8">
           <div className="flex items-center gap-2 mb-6">
             <div className="relative h-7 w-[98px]">
-              <Image src="/logo.png" alt="Abyroy Rehab" fill className="object-contain" />
+              <Image src="/logo.webp" alt="Abyroy Rehab" fill className="object-contain" />
             </div>
           </div>
 
