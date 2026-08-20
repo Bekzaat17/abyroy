@@ -29,7 +29,7 @@ export default function Header({ lang }: { lang: Lang }) {
       <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
         <Link href={home} className="shrink-0" aria-label="Abyroy Rehab">
           <div className="relative h-8 w-[112px] md:h-10 md:w-[140px]">
-            <Image src="/logo.png" alt={dict.meta.ogAlt} fill priority className="object-contain" />
+            <Image src="/logo.webp" alt={dict.meta.ogAlt} fill priority className="object-contain" />
           </div>
         </Link>
 

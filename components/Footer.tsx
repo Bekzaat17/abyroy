@@ -27,7 +27,7 @@ export default function Footer({ lang }: { lang: Lang }) {
           {/* Бренд */}
           <div className="md:col-span-5">
             <div className="flex items-center gap-2.5">
-              <img src="/logo.png" alt="Abyroy Rehab" className="h-8 w-auto" />
+              <img src="/logo.webp" alt="Abyroy Rehab" className="h-8 w-auto" />
               <span className="font-bold uppercase tracking-wider text-rehab-gold">
                 Abyroy Rehab
               </span>
