@@ -33,7 +33,7 @@ export default function Hero({ lang }: { lang: Lang }) {
       {/* Фото в своём — более широком — контейнере, чтобы стоять правее и крупнее,
           при этом текст ниже остаётся на общей сетке сайта. */}
       <div className="pointer-events-none absolute inset-0 z-10 mx-auto hidden w-full max-w-[1700px] md:block">
-        <div className="absolute bottom-0 right-0 h-full w-[46%] lg:w-[48%] xl:w-[50%]">
+        <div className="absolute bottom-0 right-0 h-full w-[44%]">
           <Image
             src="/main_page.png"
             alt={dict.meta.ogAlt}
@@ -49,12 +49,14 @@ export default function Hero({ lang }: { lang: Lang }) {
           Ширина ограничена по брейкпоинтам, чтобы длинный заголовок переносился,
           а не доезжал до фото. */}
       <div className="relative z-20 mx-auto grid w-full max-w-7xl grid-cols-12 px-4 sm:px-6 lg:px-8">
-        <div className="col-span-12 max-w-[700px] text-center md:col-span-7 md:max-w-[370px] md:text-left lg:max-w-[480px] xl:max-w-[600px] 2xl:max-w-[620px]">
+        <div className="col-span-12 max-w-[700px] text-center md:col-span-7 md:max-w-[400px] md:text-left lg:max-w-[540px] xl:max-w-[680px] 2xl:max-w-[700px]">
           <span className="inline-block rounded-full bg-rehab-gold/10 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.16em] text-rehab-gold sm:text-xs">
             {h.badge}
           </span>
 
-          <h1 className="mt-5 text-balance text-4xl font-bold leading-[1.08] text-rehab-dark sm:text-5xl lg:text-6xl xl:text-7xl">
+          {/* Кегль подобран так, чтобы вторая строка заголовка помещалась
+              в одну строку на каждом брейкпоинте, а не переносилась. */}
+          <h1 className="mt-5 text-[1.9rem] font-bold leading-[1.08] text-rehab-dark sm:text-[2.6rem] md:text-[2.625rem] lg:text-[3.5rem] xl:text-[4.25rem]">
             <span className="text-rehab-gold">{h.titleLine1}</span>
             <br />
             {h.titleLine2}
@@ -85,15 +87,16 @@ export default function Hero({ lang }: { lang: Lang }) {
             </a>
           </div>
 
-          {/* Блок доверия — прямо под кнопками, слева от фото.
-              Каждый пункт отдельной карточкой. */}
-          <ul className="mt-6 flex flex-col gap-2">
+          {/* Блок доверия — прямо под кнопками, слева от фото. Каждый пункт
+              отдельной карточкой; w-fit — чтобы карточка обжимала свой текст,
+              а не тянулась на всю колонку с пустотой справа. */}
+          <ul className="mt-6 flex flex-col items-center gap-2 md:items-start">
             {h.trust.map((item, i) => {
               const Icon = trustIcons[i];
               return (
                 <li
                   key={item.title}
-                  className="flex items-start gap-2.5 rounded-xl border border-gray-100 bg-white/80 px-3.5 py-2.5 text-left shadow-sm shadow-black/[0.03] backdrop-blur-sm"
+                  className="flex w-fit max-w-full items-start gap-2.5 rounded-xl border border-gray-100 bg-white/80 px-3.5 py-2.5 text-left shadow-sm shadow-black/[0.03] backdrop-blur-sm"
                 >
                   <Icon size={17} className="mt-0.5 shrink-0 text-rehab-gold" />
                   <p className="text-[13px] leading-snug text-gray-500">
