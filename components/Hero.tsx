@@ -21,13 +21,13 @@ export default function Hero({ lang }: { lang: Lang }) {
       {/* Слой с фото выровнен по тому же контейнеру, что и текст, и растянут на
           всю высоту секции — фигуры стоят ровно на её нижней кромке. */}
       <div className="pointer-events-none absolute inset-0 z-10 mx-auto hidden w-full max-w-7xl px-4 sm:px-6 md:block lg:px-8">
-        <div className="absolute bottom-0 right-4 h-full w-[57%] sm:right-6 lg:right-8">
+        <div className="absolute bottom-0 right-0 h-full w-[44%] lg:w-[46%] xl:w-[50%]">
           <Image
             src="/main_page.png"
             alt={dict.meta.ogAlt}
             fill
             priority
-            sizes="(min-width: 768px) 57vw, 0px"
+            sizes="(min-width: 768px) 50vw, 0px"
             className="object-contain object-bottom"
           />
         </div>
@@ -36,7 +36,9 @@ export default function Hero({ lang }: { lang: Lang }) {
       {/* Текст на той же 12-колоночной сетке, что и раньше: 7 колонок держат
           его слева от фигур на любом размере экрана. */}
       <div className="relative z-20 mx-auto grid w-full max-w-7xl grid-cols-12 px-4 sm:px-6 lg:px-8">
-        <div className="col-span-12 max-w-[700px] text-center md:col-span-7 md:text-left">
+        {/* Ширина текста ограничена по брейкпоинтам, чтобы длинный заголовок
+            переносился, а не доезжал до фигур на фото. */}
+        <div className="col-span-12 max-w-[700px] text-center md:col-span-7 md:max-w-[380px] md:text-left lg:max-w-[500px] xl:max-w-[620px]">
           <span className="inline-block rounded-full bg-rehab-gold/10 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.16em] text-rehab-gold sm:text-xs">
             {h.badge}
           </span>
