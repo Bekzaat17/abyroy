@@ -18,7 +18,4 @@ export const SEO_DATA = {
   ogImage: "/logo.png",
 };
 
-// GTM_ID: контейнер Google Tag Manager ещё не создан на момент подготовки
-// сайта под Google Ads. Замените плейсхолдер на реальный ID (вида GTM-XXXXXXX)
-// из вашего аккаунта tagmanager.google.com — до этого скрипт GTM не подключится.
-export const GTM_ID = "GTM-XXXXXXX";
+export const GTM_ID = "GTM-T85HHBFV";
