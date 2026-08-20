@@ -1,25 +1,42 @@
 import Image from "next/image";
-import { Phone, ShieldCheck, Clock, HeartHandshake } from "lucide-react";
+import { Phone } from "lucide-react";
 import { SITE_DATA } from "@/constants";
 import { getDictionary, type Lang } from "@/constants/dictionaries";
 import WhatsAppIcon from "@/components/ui/WhatsAppIcon";
-
-const trustIcons = [ShieldCheck, Clock, HeartHandshake];
 
 export default function Hero({ lang }: { lang: Lang }) {
   const dict = getDictionary(lang);
   const h = dict.hero;
 
   return (
-    <section className="relative overflow-hidden bg-rehab-light pt-28 pb-14 md:pt-36 md:pb-20">
-      {/* Мягкое золотое свечение, чтобы мобильный экран без фото не выглядел пустым */}
-      <div
-        className="pointer-events-none absolute -top-32 -left-24 h-[420px] w-[420px] rounded-full bg-rehab-gold/10 blur-3xl"
-        aria-hidden
-      />
+    <section className="relative flex min-h-[640px] flex-col justify-center overflow-hidden bg-white pt-24 pb-12 md:min-h-[88vh] md:pt-24 md:pb-0">
+      {/* Фон в две зоны: светлая слева, тёмная справа (40%).
+          Фото-вырезка ниже шире тёмной зоны — за счёт этого фигуры пересекают
+          границу цветов и получается объём. Это фишка первого экрана. */}
+      <div className="absolute inset-0 z-0 flex" aria-hidden>
+        <div className="w-full bg-rehab-light md:w-[60%]" />
+        <div className="hidden w-[40%] bg-rehab-dark md:block" />
+      </div>
 
-      <div className="relative mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-4 sm:px-6 md:grid-cols-12 lg:px-8">
-        <div className="text-center md:col-span-7 md:text-left">
+      {/* Слой с фото выровнен по тому же контейнеру, что и текст, и растянут на
+          всю высоту секции — фигуры стоят ровно на её нижней кромке. */}
+      <div className="pointer-events-none absolute inset-0 z-10 mx-auto hidden w-full max-w-7xl px-4 sm:px-6 md:block lg:px-8">
+        <div className="absolute bottom-0 right-4 h-full w-[57%] sm:right-6 lg:right-8">
+          <Image
+            src="/main_page.png"
+            alt={dict.meta.ogAlt}
+            fill
+            priority
+            sizes="(min-width: 768px) 57vw, 0px"
+            className="object-contain object-bottom"
+          />
+        </div>
+      </div>
+
+      {/* Текст на той же 12-колоночной сетке, что и раньше: 7 колонок держат
+          его слева от фигур на любом размере экрана. */}
+      <div className="relative z-20 mx-auto grid w-full max-w-7xl grid-cols-12 px-4 sm:px-6 lg:px-8">
+        <div className="col-span-12 max-w-[700px] text-center md:col-span-7 md:text-left">
           <span className="inline-block rounded-full bg-rehab-gold/10 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.16em] text-rehab-gold sm:text-xs">
             {h.badge}
           </span>
@@ -30,7 +47,7 @@ export default function Hero({ lang }: { lang: Lang }) {
             {h.titleLine2}
           </h1>
 
-          <p className="mx-auto mt-5 max-w-xl text-pretty text-sm leading-relaxed text-gray-600 sm:text-base md:mx-0 md:text-lg">
+          <p className="mx-auto mt-5 max-w-lg text-pretty text-sm leading-relaxed text-gray-600 sm:text-base md:mx-0 md:text-lg">
             {h.subtitle}
           </p>
 
@@ -53,43 +70,6 @@ export default function Hero({ lang }: { lang: Lang }) {
               <Phone size={20} />
               {h.ctaCall}
             </a>
-          </div>
-
-          {/* Блок доверия: анонимность, круглосуточность, бесплатная консультация */}
-          <ul className="mt-8 grid gap-px overflow-hidden rounded-2xl border border-gray-200/80 bg-gray-200/80 text-left sm:grid-cols-3">
-            {h.trust.map((item, i) => {
-              const Icon = trustIcons[i];
-              return (
-                <li key={item.title} className="flex items-start gap-3 bg-white/90 p-4 backdrop-blur-sm">
-                  <Icon size={20} className="mt-0.5 shrink-0 text-rehab-gold" />
-                  <div className="min-w-0">
-                    <p className="text-sm font-bold leading-snug text-rehab-dark">{item.title}</p>
-                    <p className="mt-0.5 text-xs leading-snug text-gray-500">{item.sub}</p>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-
-        {/* Фото специалиста — только на десктопе (файл тяжёлый, на мобильном не грузим).
-            Тёмная подложка сделана карточкой внутри колонки, а не полосой во всю
-            ширину экрана: так фото-вырезка всегда стоит ровно на своём фоне
-            независимо от ширины монитора. */}
-        <div className="hidden md:col-span-5 md:block">
-          <div className="relative mx-auto aspect-[4/5] w-full max-w-[420px] overflow-hidden rounded-[2.5rem] bg-rehab-dark lg:max-w-[460px]">
-            <div
-              className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-rehab-gold/25 to-transparent"
-              aria-hidden
-            />
-            <Image
-              src="/main_page.png"
-              alt={dict.meta.ogAlt}
-              fill
-              priority
-              sizes="(min-width: 1024px) 460px, (min-width: 768px) 420px, 0px"
-              className="object-contain object-bottom"
-            />
           </div>
         </div>
       </div>
