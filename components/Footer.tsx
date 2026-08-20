@@ -1,4 +1,5 @@
 "use client";
+import { Phone } from "lucide-react";
 import { SITE_DATA } from "@/constants";
 
 export default function Footer() {
@@ -42,11 +43,18 @@ export default function Footer() {
               </svg>
             </a>
           </div>
+          <a
+            href={`tel:${SITE_DATA.phone.replace(/[^\d+]/g, "")}`}
+            className="flex items-center gap-2 text-gray-300 text-xs font-semibold hover:text-rehab-gold transition-colors"
+          >
+            <Phone size={14} className="text-rehab-gold" />
+            {SITE_DATA.phone}
+          </a>
           <p className="text-gray-400 text-xs text-center">
             {SITE_DATA.address}
           </p>
         </div>
-        
+
       </div>
     </footer>
   );

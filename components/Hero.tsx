@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { Phone } from "lucide-react";
 import { SITE_DATA } from "@/constants";
 
 export default function Hero() {
@@ -14,6 +15,9 @@ export default function Hero() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 w-full h-full grid grid-cols-12 items-center">
         {/* Текст: добавлен max-w чтобы не налезал на фото */}
         <div className="col-span-12 md:col-span-7 mt-12 md:mt-0 text-center md:text-left z-20 max-w-[700px]">
+          <span className="inline-block text-[11px] sm:text-xs font-bold uppercase tracking-widest text-[#D4AF37] bg-[#D4AF37]/10 px-3 py-1.5 rounded-full mb-4 md:mb-5">
+            Реабилитационный центр в Шымкенте
+          </span>
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#333333] leading-tight mb-4 md:mb-6">
             <span className="text-[#D4AF37]">ABYROY</span> <br/>
             Жаңа өмірге қадам
@@ -38,7 +42,7 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="flex justify-center md:justify-start">
+          <div className="flex flex-wrap justify-center md:justify-start gap-3">
             <a
               href={SITE_DATA.whatsapp}
               target="_blank"
@@ -51,15 +55,22 @@ export default function Hero() {
               </svg>
               Кеңес алу
             </a>
+            <a
+              href={`tel:${SITE_DATA.phone.replace(/[^\d+]/g, "")}`}
+              className="animate-call-pulse inline-flex items-center gap-3 bg-white text-[#333333] border-2 border-[#333333] px-6 py-3 md:px-10 md:py-4 rounded-2xl font-bold hover:bg-[#333333] hover:text-white transition shadow-xl text-base md:text-lg"
+            >
+              <Phone size={22} />
+              Позвонить
+            </a>
           </div>
         </div>
 
         {/* Фото: Контейнер занимает 50%, само фото внутри центрируется */}
         <div className="hidden md:block absolute right-0 bottom-0 h-[90%] md:h-full w-[57%] z-10 pointer-events-none">
           <div className="relative w-full h-full">
-            <Image 
-              src="/main_page.png" 
-              alt="Доктор" 
+            <Image
+              src="/main_page.png"
+              alt="Врач реабилитационного центра Abyroy Rehab в Шымкенте"
               fill
               priority
               className="object-contain object-bottom"
