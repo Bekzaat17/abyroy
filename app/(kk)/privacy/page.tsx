@@ -6,10 +6,10 @@ export const metadata: Metadata = {
   title: `Құпиялылық саясаты — ${SEO_DATA.siteName}`,
   description: "Abyroy Rehab — Шымкенттегі оңалту орталығы сайтының құпиялылық саясаты.",
   alternates: {
-    canonical: `${SEO_DATA.url}/kk/privacy`,
+    canonical: `${SEO_DATA.url}/privacy`,
     languages: {
-      ru: `${SEO_DATA.url}/privacy`,
-      kk: `${SEO_DATA.url}/kk/privacy`,
+      kk: `${SEO_DATA.url}/privacy`,
+      ru: `${SEO_DATA.url}/ru/privacy`,
     },
   },
 };

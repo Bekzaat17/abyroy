@@ -6,10 +6,10 @@ export const metadata: Metadata = {
   title: `Политика конфиденциальности — ${SEO_DATA.siteName}`,
   description: "Политика конфиденциальности сайта Abyroy Rehab — реабилитационного центра в Шымкенте.",
   alternates: {
-    canonical: `${SEO_DATA.url}/privacy`,
+    canonical: `${SEO_DATA.url}/ru/privacy`,
     languages: {
-      ru: `${SEO_DATA.url}/privacy`,
-      kk: `${SEO_DATA.url}/kk/privacy`,
+      kk: `${SEO_DATA.url}/privacy`,
+      ru: `${SEO_DATA.url}/ru/privacy`,
     },
   },
 };

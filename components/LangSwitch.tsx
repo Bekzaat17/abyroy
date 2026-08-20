@@ -5,6 +5,7 @@ import { getDictionary } from "@/constants/dictionaries";
 /**
  * Переключатель языка. `altPath` — путь текущей страницы БЕЗ языкового
  * префикса (например "" для главной, "/privacy" для политики конфиденциальности).
+ * kk — язык по умолчанию (корень "/"), ru — на "/ru".
  */
 export default function LangSwitch({
   lang,
@@ -16,22 +17,13 @@ export default function LangSwitch({
   className?: string;
 }) {
   const dict = getDictionary(lang);
-  const ruHref = `${altPath || "/"}`;
-  const kkHref = `/kk${altPath}/`;
+  const kkHref = `${altPath || "/"}`;
+  const ruHref = `/ru${altPath}/`;
 
   return (
     <div
       className={`inline-flex items-center rounded-full border border-gray-200 bg-white p-0.5 text-xs font-bold ${className}`}
     >
-      <Link
-        href={ruHref}
-        aria-current={lang === "ru" ? "page" : undefined}
-        className={`px-2.5 py-1 rounded-full transition-colors ${
-          lang === "ru" ? "bg-rehab-gold text-white" : "text-gray-500 hover:text-rehab-dark"
-        }`}
-      >
-        {dict.langSwitch.ru}
-      </Link>
       <Link
         href={kkHref}
         aria-current={lang === "kk" ? "page" : undefined}
@@ -40,6 +32,15 @@ export default function LangSwitch({
         }`}
       >
         {dict.langSwitch.kk}
+      </Link>
+      <Link
+        href={ruHref}
+        aria-current={lang === "ru" ? "page" : undefined}
+        className={`px-2.5 py-1 rounded-full transition-colors ${
+          lang === "ru" ? "bg-rehab-gold text-white" : "text-gray-500 hover:text-rehab-dark"
+        }`}
+      >
+        {dict.langSwitch.ru}
       </Link>
     </div>
   );

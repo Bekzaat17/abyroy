@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { SEO_DATA, SITE_DATA } from "@/constants";
 import { getDictionary, type Lang } from "@/constants/dictionaries";
 
-// basePath: "" для ru (корень "/"), "/kk" для казахской версии.
+// basePath: "" для kk (язык по умолчанию, корень "/"), "/ru" для русской версии.
 export function pathFor(lang: Lang) {
-  return lang === "kk" ? "/kk" : "";
+  return lang === "ru" ? "/ru" : "";
 }
 
 export function buildMetadata(lang: Lang): Metadata {
@@ -30,8 +30,8 @@ export function buildMetadata(lang: Lang): Metadata {
     alternates: {
       canonical,
       languages: {
-        ru: SEO_DATA.url,
-        kk: `${SEO_DATA.url}/kk`,
+        kk: SEO_DATA.url,
+        ru: `${SEO_DATA.url}/ru`,
         "x-default": SEO_DATA.url,
       },
     },

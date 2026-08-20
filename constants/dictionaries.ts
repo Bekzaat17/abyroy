@@ -1,10 +1,10 @@
 // Единый источник переводимого текстового контента сайта.
-// lang: "ru" — основной язык (корень сайта, "/"), "kk" — казахский ("/kk").
+// lang: "kk" — язык по умолчанию (корень сайта, "/"), "ru" — русский ("/ru").
 // Всё, что НЕ зависит от языка (телефон, адрес, ссылки) — в constants/index.ts.
 
 export type Lang = "ru" | "kk";
-export const LANGS: Lang[] = ["ru", "kk"];
-export const DEFAULT_LANG: Lang = "ru";
+export const LANGS: Lang[] = ["kk", "ru"];
+export const DEFAULT_LANG: Lang = "kk";
 
 export interface TeamMember {
   name: string;
@@ -34,9 +34,6 @@ export interface Dictionary {
     titleLine1: string;
     titleLine2: string;
     subtitle: string;
-    pillAnon: string;
-    pillAnonSub: string;
-    pill247: string;
     statYears: { value: string; label: string };
     statTrusted: { value: string; label: string };
     statProgram: { value: string; label: string };
@@ -100,9 +97,6 @@ const ru: Dictionary = {
     titleLine1: "ABYROY",
     titleLine2: "Шаг к новой жизни",
     subtitle: "Преодолейте зависимость и вернитесь к внутренней гармонии.",
-    pillAnon: "100% Анонимность",
-    pillAnonSub: "без постановки на учёт",
-    pill247: "Приём 24/7",
     statYears: { value: "15+", label: "лет опыта" },
     statTrusted: { value: "2500+", label: "доверились нам" },
     statProgram: { value: "24/7", label: "круглосуточный приём" },
@@ -279,9 +273,6 @@ const kk: Dictionary = {
     titleLine1: "ABYROY",
     titleLine2: "Жаңа өмірге қадам",
     subtitle: "Тәуелділікті еңсеріп, ішкі үйлесімділікке қайта оралыңыз.",
-    pillAnon: "100% Анонимдылық",
-    pillAnonSub: "есепке қойылмайды",
-    pill247: "Тәулік бойы қабылдау",
     statYears: { value: "15+", label: "жылдық тәжірибе" },
     statTrusted: { value: "2500+", label: "сенім білдірген" },
     statProgram: { value: "24/7", label: "тәулік бойы қабылдау" },
