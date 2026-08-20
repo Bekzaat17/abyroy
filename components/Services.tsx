@@ -1,5 +1,6 @@
 import { Pill, Wine, Gamepad2, Users } from "lucide-react";
 import { getDictionary, type Lang } from "@/constants/dictionaries";
+import { Section, SectionHeading } from "@/components/ui/Section";
 
 const icons = [Pill, Wine, Gamepad2, Users];
 
@@ -7,41 +8,32 @@ export default function Services({ lang }: { lang: Lang }) {
   const dict = getDictionary(lang);
 
   return (
-    <section id="services" className="py-24 bg-[#F5F5F7] scroll-mt-24">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="mb-12">
-          <h2 className="text-4xl font-bold text-rehab-dark mb-2 uppercase">{dict.services.title}</h2>
-          <p className="text-gray-500 text-sm md:text-base mb-4">
-            {dict.services.subtitle}
-          </p>
-          <div className="h-1 w-20 bg-rehab-gold"></div>
-        </div>
+    <Section id="services" className="bg-rehab-light">
+      <SectionHeading
+        eyebrow={dict.services.eyebrow}
+        title={dict.services.title}
+        subtitle={dict.services.subtitle}
+      />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {dict.services.items.map((service, index) => {
-            const Icon = icons[index];
-            return (
-              <div key={index} className="bg-rehab-dark rounded-2xl p-8 shadow-xl transition-all hover:-translate-y-2 flex flex-col">
-                <div className="w-16 h-16 bg-rehab-gold/10 rounded-xl flex items-center justify-center mb-6 text-rehab-gold">
-                  <Icon size={32} />
-                </div>
-
-                <div className="flex-grow">
-                  <h3 className="text-xl font-bold text-white mb-1 uppercase tracking-tight">
-                    {service.title}
-                  </h3>
-                  <p className="text-rehab-gold text-xs font-semibold mb-4">
-                    {service.tag}
-                  </p>
-                  <p className="text-gray-400 text-sm mb-8 leading-relaxed">
-                    {service.desc}
-                  </p>
-                </div>
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+        {dict.services.items.map((service, index) => {
+          const Icon = icons[index];
+          return (
+            <article
+              key={service.title}
+              className="group flex flex-col rounded-3xl bg-rehab-dark p-6 shadow-lg shadow-black/5 transition-transform duration-300 hover:-translate-y-1 lg:p-7"
+            >
+              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-rehab-gold/10 text-rehab-gold transition-colors duration-300 group-hover:bg-rehab-gold group-hover:text-white">
+                <Icon size={26} />
               </div>
-            );
-          })}
-        </div>
+
+              <h3 className="text-lg font-bold leading-snug text-white">{service.title}</h3>
+              <p className="mt-1.5 text-xs font-semibold text-rehab-gold">{service.tag}</p>
+              <p className="mt-4 text-sm leading-relaxed text-white/60">{service.desc}</p>
+            </article>
+          );
+        })}
       </div>
-    </section>
+    </Section>
   );
 }
