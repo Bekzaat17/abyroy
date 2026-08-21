@@ -105,18 +105,24 @@ export default function Footer({ lang }: { lang: Lang }) {
           </div>
         </div>
 
-        {/* Нижняя строка + дисклеймер: единый низ футера, без второго «этажа» */}
-        <div className="mt-12 border-t border-white/10 pt-6">
-          <div className="flex flex-col gap-3 text-xs text-white/40 sm:flex-row sm:items-center sm:justify-between">
+        {/* Нижняя строка + дисклеймер: единый низ футера, без второго «этажа».
+            Вся эта зона — мелкий шрифт, приглушённый до почти слияния с фоном.
+            Ссылка на политику и дисклеймер обязаны присутствовать (требование
+            модерации Google Ads), поэтому они не убраны, а только притушены,
+            и при наведении/фокусе ссылка снова становится читаемой. */}
+        <div className="mt-12 border-t border-white/[0.07] pt-6">
+          <div className="flex flex-col gap-2 text-[11px] text-white/25 sm:flex-row sm:items-center sm:justify-between">
             <p>
               © {new Date().getFullYear()} {dict.footer.legalName} — {dict.footer.rights}
             </p>
-            <Link href={privacyHref} className="transition-colors hover:text-rehab-gold">
+            <Link
+              href={privacyHref}
+              className="transition-colors hover:text-white/70 focus-visible:text-white/70"
+            >
               {dict.footer.privacyLink}
             </Link>
           </div>
-          {/* Юридическая приписка намеренно почти сливается с фоном футера */}
-          <p className="mt-4 max-w-3xl text-[11px] leading-relaxed text-white/20">
+          <p className="mt-3 max-w-3xl text-[10px] leading-relaxed text-white/[0.13]">
             {dict.footer.disclaimer}
           </p>
         </div>
