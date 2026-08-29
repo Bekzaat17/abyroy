@@ -3,7 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, Menu, X, MapPin } from "lucide-react";
-import { SITE_DATA } from "@/constants";
+import { getWhatsAppLink, SITE_DATA } from "@/constants";
 import { getDictionary, type Lang } from "@/constants/dictionaries";
 import LangSwitch from "@/components/LangSwitch";
 import WhatsAppIcon from "@/components/ui/WhatsAppIcon";
@@ -23,6 +23,7 @@ export default function Header({ lang }: { lang: Lang }) {
 
   const home = lang === "ru" ? "/ru/" : "/";
   const tel = `tel:${SITE_DATA.phone.replace(/[^\d+]/g, "")}`;
+  const whatsapp = getWhatsAppLink(lang);
 
   return (
     <header className="fixed top-0 z-50 w-full border-b border-gray-100 bg-white/85 backdrop-blur-md">
@@ -101,7 +102,7 @@ export default function Header({ lang }: { lang: Lang }) {
               </div>
 
               <a
-                href={SITE_DATA.whatsapp}
+                href={whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-event="click_whatsapp"

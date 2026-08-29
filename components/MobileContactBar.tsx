@@ -1,10 +1,11 @@
 import { Phone } from "lucide-react";
-import { SITE_DATA } from "@/constants";
+import { getWhatsAppLink, SITE_DATA } from "@/constants";
 import { getDictionary, type Lang } from "@/constants/dictionaries";
 import WhatsAppIcon from "@/components/ui/WhatsAppIcon";
 
 export default function MobileContactBar({ lang }: { lang: Lang }) {
   const dict = getDictionary(lang);
+  const whatsapp = getWhatsAppLink(lang);
 
   // Панель постоянно на экране, поэтому пульсация здесь не нужна — она только
   // мельтешила бы; пульсируют кнопки внутри страницы, до которых нужно долистать.
@@ -22,7 +23,7 @@ export default function MobileContactBar({ lang }: { lang: Lang }) {
         {dict.mobileBar.call}
       </a>
       <a
-        href={SITE_DATA.whatsapp}
+        href={whatsapp}
         target="_blank"
         rel="noopener noreferrer"
         data-event="click_whatsapp"

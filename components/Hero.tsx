@@ -1,5 +1,5 @@
 import { Phone, ShieldCheck, Clock, HeartHandshake } from "lucide-react";
-import { SITE_DATA } from "@/constants";
+import { getWhatsAppLink, SITE_DATA } from "@/constants";
 import { getDictionary, type Lang } from "@/constants/dictionaries";
 import WhatsAppIcon from "@/components/ui/WhatsAppIcon";
 
@@ -75,7 +75,7 @@ export default function Hero({ lang }: { lang: Lang }) {
 
           <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-center md:justify-start">
             <a
-              href={SITE_DATA.whatsapp}
+              href={getWhatsAppLink(lang)}
               target="_blank"
               rel="noopener noreferrer"
               data-event="click_whatsapp"

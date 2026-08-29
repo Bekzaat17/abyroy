@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Phone, MapPin } from "lucide-react";
-import { SITE_DATA } from "@/constants";
+import { getWhatsAppLink, SITE_DATA } from "@/constants";
 import { getDictionary, type Lang } from "@/constants/dictionaries";
 import WhatsAppIcon from "@/components/ui/WhatsAppIcon";
 
@@ -8,6 +8,7 @@ export default function Footer({ lang }: { lang: Lang }) {
   const dict = getDictionary(lang);
   const prefix = lang === "ru" ? "/ru" : "";
   const privacyHref = `${prefix}/privacy/`;
+  const whatsapp = getWhatsAppLink(lang);
 
   const navLinks = [
     { href: "#about", label: dict.nav.about },
@@ -50,7 +51,7 @@ export default function Footer({ lang }: { lang: Lang }) {
                 </svg>
               </a>
               <a
-                href={SITE_DATA.whatsapp}
+                href={whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="WhatsApp"

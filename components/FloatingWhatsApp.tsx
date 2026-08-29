@@ -1,4 +1,4 @@
-import { SITE_DATA } from "@/constants";
+import { getWhatsAppLink } from "@/constants";
 import { getDictionary, type Lang } from "@/constants/dictionaries";
 import WhatsAppIcon from "@/components/ui/WhatsAppIcon";
 
@@ -7,7 +7,7 @@ export default function FloatingWhatsApp({ lang }: { lang: Lang }) {
 
   return (
     <a
-      href={SITE_DATA.whatsapp}
+      href={getWhatsAppLink(lang)}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={dict.mobileBar.whatsapp}

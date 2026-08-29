@@ -1,10 +1,11 @@
 import { Phone, Lock } from "lucide-react";
-import { SITE_DATA } from "@/constants";
+import { getWhatsAppLink, SITE_DATA } from "@/constants";
 import { getDictionary, type Lang } from "@/constants/dictionaries";
 import WhatsAppIcon from "@/components/ui/WhatsAppIcon";
 
 export default function CTA({ lang }: { lang: Lang }) {
   const dict = getDictionary(lang);
+  const whatsapp = getWhatsAppLink(lang);
 
   return (
     <section className="relative overflow-hidden bg-rehab-dark py-16 md:py-24">
@@ -39,7 +40,7 @@ export default function CTA({ lang }: { lang: Lang }) {
             {SITE_DATA.phone}
           </a>
           <a
-            href={SITE_DATA.whatsapp}
+            href={whatsapp}
             target="_blank"
             rel="noopener noreferrer"
             data-event="click_whatsapp"
