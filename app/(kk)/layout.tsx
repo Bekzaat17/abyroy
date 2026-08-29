@@ -3,8 +3,10 @@ import "../globals.css";
 import { montserrat } from "@/lib/fonts";
 import { buildMetadata, buildJsonLd } from "@/lib/seo";
 import { GTMHead, GTMBody } from "@/components/GTM";
+import GoogleAdsTag from "@/components/GoogleAdsTag";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import MobileContactBar from "@/components/MobileContactBar";
+import WhatsAppAttribution from "@/components/WhatsAppAttribution";
 
 export const metadata: Metadata = buildMetadata("kk");
 
@@ -15,6 +17,7 @@ export default function KkRootLayout({ children }: { children: React.ReactNode }
     <html lang="kk" className="scroll-smooth">
       <head>
         <GTMHead />
+        <GoogleAdsTag />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -22,6 +25,7 @@ export default function KkRootLayout({ children }: { children: React.ReactNode }
       </head>
       <body className={`${montserrat.variable} font-sans bg-[#F5F5F7] text-[#1D1D1F] antialiased`}>
         <GTMBody />
+        <WhatsAppAttribution />
         {children}
         <FloatingWhatsApp lang="kk" />
         <MobileContactBar lang="kk" />

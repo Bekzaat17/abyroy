@@ -2,8 +2,8 @@
 // Переводимый текстовый контент — в constants/dictionaries.ts.
 
 export const SITE_DATA = {
-  phone: "+7 (777) 533-16-72",
-  whatsapp: "https://wa.me/77775331672",
+  phone: "+7 (747) 047-40-81",
+  whatsapp: "https://wa.me/77470474081",
   instagram: "https://instagram.com/abyroyrehab.kz",
   address: "г. Шымкент, ул. Байтурсынова, 78",
   // Координаты по улице (уточнены геокодированием OpenStreetMap/Nominatim по
@@ -19,3 +19,4 @@ export const SEO_DATA = {
 };
 
 export const GTM_ID = "GTM-T85HHBFV";
+export const GOOGLE_ADS_ID = "AW-18401473334";
