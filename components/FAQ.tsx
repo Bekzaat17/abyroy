@@ -1,6 +1,7 @@
 import { Plus } from "lucide-react";
 import { getDictionary, type Lang } from "@/constants/dictionaries";
 import { Section, SectionHeading } from "@/components/ui/Section";
+import { serializeJsonLd } from "@/lib/seo";
 
 export default function FAQ({ lang }: { lang: Lang }) {
   const dict = getDictionary(lang);
@@ -48,7 +49,7 @@ export default function FAQ({ lang }: { lang: Lang }) {
 
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(faqJsonLd) }}
       />
     </Section>
   );

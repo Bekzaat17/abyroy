@@ -1,8 +1,11 @@
 import { Pill, Wine, Gamepad2, Users } from "lucide-react";
+import Link from "next/link";
 import { getDictionary, type Lang } from "@/constants/dictionaries";
 import { Section, SectionHeading } from "@/components/ui/Section";
+import { getServiceHref, type ServiceKey } from "@/lib/service-pages";
 
 const icons = [Pill, Wine, Gamepad2, Users];
+const serviceKeys: ServiceKey[] = ["drug", "alcohol", "gambling", "family"];
 
 export default function Services({ lang }: { lang: Lang }) {
   const dict = getDictionary(lang);
@@ -18,6 +21,7 @@ export default function Services({ lang }: { lang: Lang }) {
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
         {dict.services.items.map((service, index) => {
           const Icon = icons[index];
+          const href = getServiceHref(lang, serviceKeys[index]);
           return (
             <article
               key={service.title}
@@ -27,9 +31,19 @@ export default function Services({ lang }: { lang: Lang }) {
                 <Icon size={26} />
               </div>
 
-              <h3 className="text-lg font-bold leading-snug text-white">{service.title}</h3>
+              <h3 className="text-lg font-bold leading-snug text-white">
+                <Link href={href} className="transition-colors hover:text-rehab-gold">
+                  {service.title}
+                </Link>
+              </h3>
               <p className="mt-1.5 text-xs font-semibold text-rehab-gold">{service.tag}</p>
               <p className="mt-4 text-sm leading-relaxed text-white/60">{service.desc}</p>
+              <Link
+                href={href}
+                className="mt-5 inline-flex text-sm font-bold text-rehab-gold underline decoration-rehab-gold/30 underline-offset-4 transition hover:decoration-rehab-gold"
+              >
+                {lang === "ru" ? "Подробнее о программе" : "Бағдарлама туралы толығырақ"}
+              </Link>
             </article>
           );
         })}

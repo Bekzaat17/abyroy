@@ -57,16 +57,17 @@ export default function Hero({ lang }: { lang: Lang }) {
           а не доезжал до фото. */}
       <div className="relative z-20 mx-auto grid w-full max-w-7xl grid-cols-12 px-4 sm:px-6 lg:px-8">
         <div className="col-span-12 max-w-[700px] text-center md:col-span-7 md:max-w-[400px] md:text-left lg:max-w-[540px] xl:max-w-[680px] 2xl:max-w-[700px]">
-          <span className="inline-block rounded-full bg-rehab-gold/10 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.16em] text-rehab-gold sm:text-xs">
-            {h.badge}
-          </span>
-
-          {/* Кегль подобран так, чтобы вторая строка заголовка помещалась
-              в одну строку на каждом брейкпоинте, а не переносилась. */}
-          <h1 className="mt-5 text-[1.9rem] font-bold leading-[1.08] text-rehab-dark sm:text-[2.6rem] md:text-[2.625rem] lg:text-[3.5rem] xl:text-[4.25rem]">
-            <span className="text-rehab-gold">{h.titleLine1}</span>
-            <br />
-            {h.titleLine2}
+          {/* В H1 входит и видимый поисковый интент, и брендовый заголовок.
+              Это сохраняет дизайн, но однозначно описывает тему страницы. */}
+          <h1>
+            <span className="inline-block rounded-full bg-rehab-gold/10 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.16em] text-rehab-gold sm:text-xs">
+              {h.badge}
+            </span>
+            <span className="mt-5 block text-[1.9rem] font-bold leading-[1.08] text-rehab-dark sm:text-[2.6rem] md:text-[2.625rem] lg:text-[3.5rem] xl:text-[4.25rem]">
+              <span className="text-rehab-gold">{h.titleLine1}</span>
+              <br />
+              {h.titleLine2}
+            </span>
           </h1>
 
           <p className="mx-auto mt-5 max-w-lg text-pretty text-sm leading-relaxed text-gray-600 sm:text-base md:mx-0 md:text-base">

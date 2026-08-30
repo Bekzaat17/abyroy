@@ -10,5 +10,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
     },
     sitemap: `${SEO_DATA.url}/sitemap.xml`,
+    host: SEO_DATA.url,
   };
 }

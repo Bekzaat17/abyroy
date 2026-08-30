@@ -8,7 +8,15 @@ import { getDictionary, type Lang } from "@/constants/dictionaries";
 import LangSwitch from "@/components/LangSwitch";
 import WhatsAppIcon from "@/components/ui/WhatsAppIcon";
 
-export default function Header({ lang }: { lang: Lang }) {
+export default function Header({
+  lang,
+  altPath,
+  alternateHrefs,
+}: {
+  lang: Lang;
+  altPath?: string;
+  alternateHrefs?: { kk: string; ru: string };
+}) {
   const [open, setOpen] = useState(false);
   const dict = getDictionary(lang);
 
@@ -38,7 +46,7 @@ export default function Header({ lang }: { lang: Lang }) {
           {navLinks.map((link) => (
             <Link
               key={link.href}
-              href={link.href}
+              href={`${home}${link.href}`}
               className="whitespace-nowrap transition-colors hover:text-rehab-gold"
             >
               {link.label}
@@ -47,7 +55,12 @@ export default function Header({ lang }: { lang: Lang }) {
         </nav>
 
         <div className="flex items-center gap-2 md:gap-3">
-          <LangSwitch lang={lang} className="hidden sm:inline-flex" />
+          <LangSwitch
+            lang={lang}
+            altPath={altPath}
+            alternateHrefs={alternateHrefs}
+            className="hidden sm:inline-flex"
+          />
 
           <a
             href={tel}
@@ -79,7 +92,7 @@ export default function Header({ lang }: { lang: Lang }) {
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
-                  href={link.href}
+                  href={`${home}${link.href}`}
                   onClick={() => setOpen(false)}
                   className="rounded-lg py-2.5 text-sm font-medium text-gray-700 transition-colors hover:text-rehab-gold"
                 >
@@ -98,7 +111,12 @@ export default function Header({ lang }: { lang: Lang }) {
                   <Phone size={16} className="text-rehab-gold" />
                   {SITE_DATA.phone}
                 </a>
-                <LangSwitch lang={lang} className="sm:hidden" />
+                <LangSwitch
+                  lang={lang}
+                  altPath={altPath}
+                  alternateHrefs={alternateHrefs}
+                  className="sm:hidden"
+                />
               </div>
 
               <a

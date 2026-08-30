@@ -10,10 +10,17 @@ import Reviews from "@/components/Reviews";
 import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
+import { buildJsonLd, serializeJsonLd } from "@/lib/seo";
 
 export default function HomePage({ lang }: { lang: Lang }) {
+  const jsonLd = buildJsonLd(lang);
+
   return (
     <main className="min-h-screen bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
+      />
       <Header lang={lang} />
       <Hero lang={lang} />
       <Intro lang={lang} />

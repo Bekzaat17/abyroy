@@ -10,15 +10,17 @@ import { getDictionary } from "@/constants/dictionaries";
 export default function LangSwitch({
   lang,
   altPath = "",
+  alternateHrefs,
   className = "",
 }: {
   lang: Lang;
   altPath?: string;
+  alternateHrefs?: { kk: string; ru: string };
   className?: string;
 }) {
   const dict = getDictionary(lang);
-  const kkHref = `${altPath || "/"}`;
-  const ruHref = `/ru${altPath}/`;
+  const kkHref = alternateHrefs?.kk ?? `${altPath || "/"}`;
+  const ruHref = alternateHrefs?.ru ?? `/ru${altPath}/`;
 
   return (
     <div
