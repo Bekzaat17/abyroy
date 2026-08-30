@@ -1,4 +1,4 @@
-import { Pill, Wine, Gamepad2, Users } from "lucide-react";
+import { ArrowRight, Pill, Wine, Gamepad2, Users } from "lucide-react";
 import Link from "next/link";
 import { getDictionary, type Lang } from "@/constants/dictionaries";
 import { Section, SectionHeading } from "@/components/ui/Section";
@@ -40,13 +40,24 @@ export default function Services({ lang }: { lang: Lang }) {
               <p className="mt-4 text-sm leading-relaxed text-white/60">{service.desc}</p>
               <Link
                 href={href}
-                className="mt-5 inline-flex text-sm font-bold text-rehab-gold underline decoration-rehab-gold/30 underline-offset-4 transition hover:decoration-rehab-gold"
+                className="mt-5 inline-flex items-center justify-center gap-2 rounded-xl border border-rehab-gold/30 px-4 py-2.5 text-sm font-bold text-rehab-gold transition hover:border-rehab-gold hover:bg-rehab-gold hover:text-white"
               >
                 {lang === "ru" ? "Подробнее о программе" : "Бағдарлама туралы толығырақ"}
+                <ArrowRight size={16} aria-hidden />
               </Link>
             </article>
           );
         })}
+      </div>
+
+      <div className="mt-10 text-center">
+        <Link
+          href={lang === "ru" ? "/ru/services/" : "/services/"}
+          className="inline-flex items-center gap-2 rounded-2xl bg-rehab-dark px-6 py-3.5 text-sm font-bold text-white transition hover:bg-rehab-gold sm:text-base"
+        >
+          {lang === "ru" ? "Смотреть все услуги" : "Барлық қызметті көру"}
+          <ArrowRight size={17} aria-hidden />
+        </Link>
       </div>
     </Section>
   );

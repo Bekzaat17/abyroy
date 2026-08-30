@@ -1,6 +1,13 @@
 import type { MetadataRoute } from "next";
+import { getAnswerPageByKey, getAnswerPages } from "@/lib/answer-pages";
 import { getServicePageByKey, getServicePages } from "@/lib/service-pages";
-import { absoluteUrl, getServiceAlternates, getServiceUrl } from "@/lib/seo";
+import {
+  absoluteUrl,
+  getAnswerAlternates,
+  getAnswerUrl,
+  getServiceAlternates,
+  getServiceUrl,
+} from "@/lib/seo";
 
 export const dynamic = "force-static";
 
@@ -48,6 +55,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
       alternates: alternates("/services/", "/ru/services/"),
     },
     {
+      url: absoluteUrl("/answers/"),
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.8,
+      alternates: alternates("/answers/", "/ru/answers/"),
+    },
+    {
+      url: absoluteUrl("/ru/answers/"),
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.8,
+      alternates: alternates("/answers/", "/ru/answers/"),
+    },
+    {
       url: absoluteUrl("/privacy/"),
       lastModified: now,
       changeFrequency: "yearly",
@@ -85,5 +106,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ];
   });
 
-  return [...staticPages, ...servicePages];
+  const answerPages: MetadataRoute.Sitemap = getAnswerPages("kk").flatMap((kkPage) => {
+    const ruPage = getAnswerPageByKey("ru", kkPage.key);
+    const localized = { languages: getAnswerAlternates(kkPage) };
+
+    return [
+      {
+        url: getAnswerUrl("kk", kkPage),
+        lastModified: now,
+        changeFrequency: "monthly" as const,
+        priority: 0.8,
+        alternates: localized,
+      },
+      {
+        url: getAnswerUrl("ru", ruPage),
+        lastModified: now,
+        changeFrequency: "monthly" as const,
+        priority: 0.8,
+        alternates: localized,
+      },
+    ];
+  });
+
+  return [...staticPages, ...servicePages, ...answerPages];
 }

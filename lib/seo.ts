@@ -5,6 +5,10 @@ import {
   getServicePageByKey,
   type ServicePageContent,
 } from "@/lib/service-pages";
+import {
+  getAnswerPageByKey,
+  type AnswerPageContent,
+} from "@/lib/answer-pages";
 
 // basePath: "" для kk (язык по умолчанию, корень "/"), "/ru" для русской версии.
 export function pathFor(lang: Lang) {
@@ -328,6 +332,179 @@ export function buildServicesHubJsonLd(lang: Lang, pages: ServicePageContent[]) 
         position: index + 1,
         name: page.title,
         url: getServiceUrl(lang, page),
+      })),
+    },
+  };
+}
+
+export function getAnswerUrl(lang: Lang, page: AnswerPageContent) {
+  const prefix = lang === "ru" ? "/ru" : "";
+  return absoluteUrl(`${prefix}/answers/${page.slug}/`);
+}
+
+export function getAnswerAlternates(page: AnswerPageContent) {
+  const kkPage = getAnswerPageByKey("kk", page.key);
+  const ruPage = getAnswerPageByKey("ru", page.key);
+
+  return {
+    kk: getAnswerUrl("kk", kkPage),
+    ru: getAnswerUrl("ru", ruPage),
+    "x-default": getAnswerUrl("kk", kkPage),
+  };
+}
+
+export function buildAnswerMetadata(lang: Lang, page: AnswerPageContent): Metadata {
+  const canonical = getAnswerUrl(lang, page);
+
+  return {
+    metadataBase: new URL(SEO_DATA.url),
+    title: page.metaTitle,
+    description: page.metaDescription,
+    applicationName: SEO_DATA.siteName,
+    alternates: {
+      canonical,
+      languages: getAnswerAlternates(page),
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+    openGraph: {
+      type: "article",
+      title: page.metaTitle,
+      description: page.metaDescription,
+      url: canonical,
+      siteName: SEO_DATA.siteName,
+      locale: lang === "kk" ? "kk_KZ" : "ru_KZ",
+      images: [{ url: SEO_DATA.ogImage, width: 1200, height: 1006, alt: page.question }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: page.metaTitle,
+      description: page.metaDescription,
+      images: [SEO_DATA.ogImage],
+    },
+  };
+}
+
+export function buildAnswersHubMetadata(lang: Lang): Metadata {
+  const isRu = lang === "ru";
+  const canonical = absoluteUrl(isRu ? "/ru/answers/" : "/answers/");
+  const title = isRu
+    ? "Ответы о лечении зависимости — помощь семье | Abyroy Rehab"
+    : "Тәуелділікті емдеу туралы жауаптар — отбасыға көмек | Abyroy Rehab";
+  const description = isRu
+    ? "Что делать, если близкий употребляет наркотики, пьёт, играет на деньги или отказывается лечиться. Понятные ответы специалистов Abyroy Rehab в Шымкенте."
+    : "Жақыныңыз есірткі қолданса, ішімдік ішсе, ақшаға ойнаса немесе емделуден бас тартса не істеу керек. Шымкенттегі Abyroy Rehab жауаптары.";
+
+  return {
+    metadataBase: new URL(SEO_DATA.url),
+    title,
+    description,
+    alternates: {
+      canonical,
+      languages: {
+        kk: absoluteUrl("/answers/"),
+        ru: absoluteUrl("/ru/answers/"),
+        "x-default": absoluteUrl("/answers/"),
+      },
+    },
+    openGraph: {
+      type: "website",
+      title,
+      description,
+      url: canonical,
+      siteName: SEO_DATA.siteName,
+      locale: isRu ? "ru_KZ" : "kk_KZ",
+      images: [{ url: SEO_DATA.ogImage, width: 1200, height: 1006 }],
+    },
+  };
+}
+
+export function buildAnswerJsonLd(lang: Lang, page: AnswerPageContent) {
+  const url = getAnswerUrl(lang, page);
+  const home = absoluteUrl(pathFor(lang));
+  const answers = absoluteUrl(lang === "ru" ? "/ru/answers/" : "/answers/");
+  const service = getServicePageByKey(lang, page.serviceKey);
+  const serviceUrl = getServiceUrl(lang, service);
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "@id": `${url}#article`,
+        headline: page.question,
+        description: page.metaDescription,
+        inLanguage: lang,
+        mainEntityOfPage: { "@id": `${url}#webpage` },
+        author: { "@id": `${SEO_DATA.url}/#organization` },
+        publisher: { "@id": `${SEO_DATA.url}/#organization` },
+        about: { "@id": `${serviceUrl}#service` },
+      },
+      {
+        "@type": "WebPage",
+        "@id": `${url}#webpage`,
+        url,
+        name: page.question,
+        description: page.metaDescription,
+        inLanguage: lang,
+        isPartOf: { "@id": `${SEO_DATA.url}/#website` },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: lang === "ru" ? "Главная" : "Басты бет",
+            item: home,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: lang === "ru" ? "Ответы" : "Жауаптар",
+            item: answers,
+          },
+          { "@type": "ListItem", position: 3, name: page.question, item: url },
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: page.faq.map((item) => ({
+          "@type": "Question",
+          name: item.q,
+          acceptedAnswer: { "@type": "Answer", text: item.a },
+        })),
+      },
+    ],
+  };
+}
+
+export function buildAnswersHubJsonLd(lang: Lang, pages: AnswerPageContent[]) {
+  const url = absoluteUrl(lang === "ru" ? "/ru/answers/" : "/answers/");
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${url}#webpage`,
+    url,
+    name: lang === "ru" ? "Ответы о зависимости" : "Тәуелділік туралы жауаптар",
+    inLanguage: lang,
+    isPartOf: { "@id": `${SEO_DATA.url}/#website` },
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: pages.map((page, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: page.question,
+        url: getAnswerUrl(lang, page),
       })),
     },
   };

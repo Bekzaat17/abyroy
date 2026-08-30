@@ -22,11 +22,11 @@ export default function Header({
 
   const navLinks = [
     { href: "#about", label: dict.nav.about },
-    { href: "#services", label: dict.nav.services },
+    { href: "services/", label: dict.nav.services },
     { href: "#roadmap", label: dict.nav.roadmap },
     { href: "#team", label: dict.nav.team },
     { href: "#reviews", label: dict.nav.reviews },
-    { href: "#faq", label: dict.nav.faq },
+    { href: "answers/", label: dict.nav.faq },
   ];
 
   const home = lang === "ru" ? "/ru/" : "/";

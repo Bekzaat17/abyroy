@@ -7,6 +7,7 @@ import Services from "@/components/Services";
 import Roadmap from "@/components/Roadmap";
 import Team from "@/components/Team";
 import Reviews from "@/components/Reviews";
+import PopularQuestions from "@/components/PopularQuestions";
 import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
@@ -29,6 +30,7 @@ export default function HomePage({ lang }: { lang: Lang }) {
       <Roadmap lang={lang} />
       <Team lang={lang} />
       <Reviews lang={lang} />
+      <PopularQuestions lang={lang} />
       <FAQ lang={lang} />
       <CTA lang={lang} />
       <Footer lang={lang} />

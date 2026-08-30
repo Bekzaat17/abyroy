@@ -13,6 +13,7 @@ import Header from "@/components/Header";
 import WhatsAppIcon from "@/components/ui/WhatsAppIcon";
 import { getWhatsAppLink, SITE_DATA } from "@/constants";
 import type { Lang } from "@/constants/dictionaries";
+import { getAnswerPagesForService } from "@/lib/answer-pages";
 import {
   getServicePageByKey,
   getServicePages,
@@ -20,6 +21,7 @@ import {
 } from "@/lib/service-pages";
 import {
   buildServiceJsonLd,
+  getAnswerUrl,
   getServiceUrl,
   serializeJsonLd,
 } from "@/lib/seo";
@@ -41,6 +43,7 @@ export default function ServiceLandingPage({
     ru: new URL(getServiceUrl("ru", isRu ? page : alternatePage)).pathname,
   };
   const relatedPages = getServicePages(lang).filter((item) => item.key !== page.key);
+  const relatedAnswers = getAnswerPagesForService(lang, page.key);
   const jsonLd = buildServiceJsonLd(lang, page);
   const tel = `tel:${SITE_DATA.phone.replace(/[^+\d]/g, "")}`;
 
@@ -166,6 +169,27 @@ export default function ServiceLandingPage({
                 </div>
               </div>
             </aside>
+
+            {relatedAnswers.length > 0 && (
+              <nav aria-label={isRu ? "Ответы по теме" : "Тақырып бойынша жауаптар"}>
+                <h2 className="text-balance text-2xl font-bold text-rehab-dark sm:text-3xl">
+                  {isRu ? "Что спрашивают родственники" : "Туыстар не сұрайды"}
+                </h2>
+                <ul className="mt-6 grid gap-3 md:grid-cols-2">
+                  {relatedAnswers.map((answer) => (
+                    <li key={answer.key}>
+                      <Link
+                        href={new URL(getAnswerUrl(lang, answer)).pathname}
+                        className="group flex h-full items-center justify-between gap-3 rounded-2xl border border-gray-100 bg-rehab-light/60 p-5 font-bold leading-snug text-rehab-dark transition hover:border-rehab-gold/30 hover:bg-white hover:text-rehab-gold"
+                      >
+                        {answer.question}
+                        <ArrowRight size={17} className="shrink-0 transition-transform group-hover:translate-x-1" aria-hidden />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            )}
 
             <section aria-labelledby="service-faq">
               <h2 id="service-faq" className="text-balance text-2xl font-bold text-rehab-dark sm:text-3xl">
